@@ -1,4 +1,44 @@
 body {
-  margin: auto;
-  padding: 2rem;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    color: black !important;
+}
+
+body::-webkit-scrollbar {
+    display: none;
+}
+
+.titlebar {
+    height: 2rem;
+    margin: 0px;
+    padding: 0px;
+    -webkit-app-region: drag;
+}
+
+.titlebar button {
+    background-color: transparent;
+    color: white;
+    width: 1.5rem;
+    height: 2rem;
+    border: none;
+    -webkit-app-region: no-drag;
+    display: inline-flex;
+    align-items: center; 
+}
+
+.titlebar button:hover {
+    background-color: #2d3238;
+}
+
+.titlebar button:last-child:hover {
+    background-color: red; 
 }
