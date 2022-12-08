@@ -25,6 +25,15 @@ if(document.getElementById("searchField")) {
     });
 }
 
+//Download output as txt file
+function download(fileName, textareaID) {
+    var downloadableLink = document.createElement('a');
+    downloadableLink.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(document.getElementById(textareaID).value));
+    downloadableLink.download = fileName + ".txt";
+    document.body.appendChild(downloadableLink);
+    downloadableLink.click();
+    document.body.removeChild(downloadableLink);
+}
 
 // Tools and Scripts
 if(document.getElementById("hostSnifferBtn")) {
@@ -32,7 +41,6 @@ if(document.getElementById("hostSnifferBtn")) {
         const startIp = document.getElementById("hostSnifferStartIp");
         const endIp = document.getElementById("hostSnifferEndIp");
         const output = document.getElementById("hostSnifferOutput");
-        alert("Sniffing has been initialize, be patient! Working...")
         const py = exec(`py ./python/HostnameSniffer.py ${startIp.value} ${endIp.value}`);
         py.stdout.on('data', (data) => {
             output.value += data;
@@ -40,13 +48,20 @@ if(document.getElementById("hostSnifferBtn")) {
         startIp.value = "";
         endIp.value = "";
     });
+    document.getElementById("hostSnifferSave").addEventListener("click", () => {
+        download("hostnames", "hostSnifferOutput");
+    });
 }
 
 if(document.getElementById("chromePassBtn")) {
     document.getElementById("chromePassBtn").addEventListener("click", () => {
+        console.log("Extracting")
         const output = document.getElementById("chromePassOutput");
         const py = exec(`py ./python/ChromePassExtractor.py`, (error, stdout, stderr) => { 
             output.value = stdout;
         });
+    });
+    document.getElementById("chromePassSave").addEventListener("click", () => {
+        download("chromepasswords", "chromePassOutput");
     });
 }
