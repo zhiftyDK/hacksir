@@ -17,6 +17,15 @@ body::-webkit-scrollbar {
     display: none;
 }
 
+.noScrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.noScrollbar::-webkit-scrollbar {
+    display: none;
+}
+
 .titlebar {
     height: 2rem;
     margin: 0px;
@@ -27,12 +36,13 @@ body::-webkit-scrollbar {
 .titlebar button {
     background-color: transparent;
     color: white;
-    width: 1.5rem;
+    width: 2.5rem;
     height: 2rem;
     border: none;
     -webkit-app-region: no-drag;
     display: inline-flex;
-    align-items: center; 
+    align-items: center;
+    justify-content: center;
 }
 
 .titlebar button:hover {

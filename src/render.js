@@ -1,7 +1,5 @@
 const { exec } = require("node:child_process");
 const { ipcRenderer } = require("electron");
-const { stringify } = require("node:querystring");
-const { hostname } = require("node:os");
 
 document.getElementById("minimizeBtn").addEventListener("click", () => {
     ipcRenderer.send("minimizeApp");
@@ -34,13 +32,21 @@ if(document.getElementById("hostSnifferBtn")) {
         const startIp = document.getElementById("hostSnifferStartIp");
         const endIp = document.getElementById("hostSnifferEndIp");
         const output = document.getElementById("hostSnifferOutput");
-        
-        console.log(startIp.value, endIp.value);
-        exec(`py ./python/HostnameSniffer.py ${startIp.value} ${endIp.value}`, (error, stdout, stderr) => { 
-            console.log(stdout);
-            output.value = stdout;
+        alert("Sniffing has been initialize, be patient! Working...")
+        const py = exec(`py ./python/HostnameSniffer.py ${startIp.value} ${endIp.value}`);
+        py.stdout.on('data', (data) => {
+            output.value += data;
         });
         startIp.value = "";
         endIp.value = "";
+    });
+}
+
+if(document.getElementById("chromePassBtn")) {
+    document.getElementById("chromePassBtn").addEventListener("click", () => {
+        const output = document.getElementById("chromePassOutput");
+        const py = exec(`py ./python/ChromePassExtractor.py`, (error, stdout, stderr) => { 
+            output.value = stdout;
+        });
     });
 }
