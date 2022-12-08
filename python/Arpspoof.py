@@ -1,8 +1,9 @@
 import scapy.all as scapy
 import time
+import sys
 
 interval = 4
-ip_target = input("Enter target IP address: ")
+ip_target = sys.argv[1]
 ip_gateway = input("Enter gateway IP address: ")
 
 

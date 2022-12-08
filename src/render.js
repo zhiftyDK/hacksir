@@ -41,12 +41,21 @@ if(document.getElementById("hostSnifferBtn")) {
         const startIp = document.getElementById("hostSnifferStartIp");
         const endIp = document.getElementById("hostSnifferEndIp");
         const output = document.getElementById("hostSnifferOutput");
+        const btn = document.getElementById("hostSnifferBtn");
+
+        btn.disabled = true;
+        
         const py = exec(`py ./python/HostnameSniffer.py ${startIp.value} ${endIp.value}`);
         py.stdout.on('data', (data) => {
             output.value += data;
         });
+
         startIp.value = "";
         endIp.value = "";
+
+        py.on("close", () => {
+            btn.disabled = false;
+        });
     });
     document.getElementById("hostSnifferSave").addEventListener("click", () => {
         download("hostnames", "hostSnifferOutput");
