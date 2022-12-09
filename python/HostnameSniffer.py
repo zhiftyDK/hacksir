@@ -11,7 +11,6 @@ def main():
     #Loop through ip range
     for ip_int in range(int(start_ip), int(end_ip) + 1):
         ip = str(ipaddress.IPv4Address(ip_int))
-        print(f"{ip_int - int(start_ip)} / {int(end_ip) - int(start_ip)}", flush=True)
         try:
             p = Process(target=checkIP, args=(ip,))
             p.start()

@@ -67,18 +67,15 @@ if(document.getElementById("hostSnifferBtn")) {
         const endIp = document.getElementById("hostSnifferEndIp");
         const output = document.getElementById("hostSnifferOutput");
         const btn = document.getElementById("hostSnifferBtn");
-        const loader = document.getElementById("hostSnifferLoad");
 
         btn.disabled = true;
+
+        output.value = "Hostname sniff started!\n";
         
         const py = exec(`py ./python/HostnameSniffer.py ${startIp.value} ${endIp.value}`);
         py.stdout.on('data', (data) => {
-            if(data.includes("/")) {
-                loader.innerText = `Ip Adresses scanned: ${data}`;
-            } else {
-                output.value += data;
-                output.scrollTop = output.scrollHeight;
-            }
+            output.value += data;
+            output.scrollTop = output.scrollHeight;
         });
 
         startIp.value = "";
@@ -86,6 +83,7 @@ if(document.getElementById("hostSnifferBtn")) {
 
         py.on("close", () => {
             btn.disabled = false;
+            output.value += "Hostname sniff ended!"
         });
     });
     document.getElementById("hostSnifferSave").addEventListener("click", () => {
@@ -103,5 +101,37 @@ if(document.getElementById("chromePassBtn")) {
     });
     document.getElementById("chromePassSave").addEventListener("click", () => {
         download("chromepasswords", "chromePassOutput");
+    });
+}
+
+if(document.getElementById("xssScanBtn")) {
+    document.getElementById("xssScanBtn").addEventListener("click", () => {
+        const output = document.getElementById("xssScanOutput");
+        const url = document.getElementById("xssScanUrl");
+        output.value = "";
+        const py = exec(`py ./python/XssScanner.py ${url.value}`);
+        py.stdout.on('data', (data) => {
+            output.value += data;
+            output.scrollTop = output.scrollHeight;
+        });
+    });
+    document.getElementById("xssScanSave").addEventListener("click", () => {
+        download("xssscannerlog", "xssScanOutput");
+    });
+}
+
+if(document.getElementById("emailExtractorBtn")) {
+    document.getElementById("emailExtractorBtn").addEventListener("click", () => {
+        const output = document.getElementById("emailExtractorOutput");
+        const url = document.getElementById("emailExtractorUrl");
+        output.value = "Started email extraction!";
+        const py = exec(`py ./python/EmailExtractor.py ${url.value}`);
+        py.stdout.on('data', (data) => {
+            output.value += data;
+            output.scrollTop = output.scrollHeight;
+        });
+    });
+    document.getElementById("emailExtractorSave").addEventListener("click", () => {
+        download("extractedemails", "emailExtractorOutput");
     });
 }
