@@ -1,5 +1,6 @@
-const { exec } = require("node:child_process");
+const { exec, spawn } = require("node:child_process");
 const { ipcRenderer } = require("electron");
+const { Console } = require("node:console");
 
 document.getElementById("minimizeBtn").addEventListener("click", () => {
     ipcRenderer.send("minimizeApp");
@@ -36,18 +37,48 @@ function download(fileName, textareaID) {
 }
 
 // Tools and Scripts
+if(document.getElementById("arpSpoofBtn")) {
+    let py;
+    const output = document.getElementById("arpSpoofOutput");
+    document.getElementById("arpSpoofBtn").addEventListener("click", () => {
+        const victimIp = document.getElementById("arpSpoofVictimIp");
+        if(py != undefined) {
+            py.kill();
+            output.value = "";
+        }
+        py = spawn(`python`,["./python/Arpspoof.py",victimIp.value], {detached: true});
+        py.stdout.on('data', (data) => {
+            output.value += data;
+            output.scrollTop = output.scrollHeight;
+        });
+    });
+    document.getElementById("arpSpoofStopBtn").addEventListener("click", () => {
+        py.kill();
+        output.value += "Attack ended, restoring ip arrangement!";
+    });
+    document.getElementById("arpSpoofSave").addEventListener("click", () => {
+        download("arpspooflog", "arpSpoofOutput");
+    });
+}
+
 if(document.getElementById("hostSnifferBtn")) {
     document.getElementById("hostSnifferBtn").addEventListener("click", () => {
         const startIp = document.getElementById("hostSnifferStartIp");
         const endIp = document.getElementById("hostSnifferEndIp");
         const output = document.getElementById("hostSnifferOutput");
         const btn = document.getElementById("hostSnifferBtn");
+        const loader = document.getElementById("hostSnifferLoad");
 
         btn.disabled = true;
         
         const py = exec(`py ./python/HostnameSniffer.py ${startIp.value} ${endIp.value}`);
         py.stdout.on('data', (data) => {
-            output.value += data;
+            if(data.includes("/")) {
+                loader.innerText = `Ip Adresses scanned: ${data}`;
+            } else {
+                output.value += data;
+                output.scrollTop = output.scrollHeight;
+            }
         });
 
         startIp.value = "";
