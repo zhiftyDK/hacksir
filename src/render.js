@@ -127,19 +127,3 @@ if(document.getElementById("xssScanBtn")) {
         download("xssscannerlog", "xssScanOutput");
     });
 }
-
-if(document.getElementById("emailExtractorBtn")) {
-    document.getElementById("emailExtractorBtn").addEventListener("click", () => {
-        const output = document.getElementById("emailExtractorOutput");
-        const url = document.getElementById("emailExtractorUrl");
-        output.value = "Started email extraction!";
-        const py = exec(`py ${pathBase}/EmailExtractor.py ${url.value}`);
-        py.stdout.on('data', (data) => {
-            output.value += data;
-            output.scrollTop = output.scrollHeight;
-        });
-    });
-    document.getElementById("emailExtractorSave").addEventListener("click", () => {
-        download("extractedemails", "emailExtractorOutput");
-    });
-}
