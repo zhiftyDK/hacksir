@@ -1,6 +1,7 @@
 const { exec, spawn } = require("node:child_process");
 const { ipcRenderer } = require("electron");
 const { Console } = require("node:console");
+const path = require("node:path");
 
 document.getElementById("minimizeBtn").addEventListener("click", () => {
     ipcRenderer.send("minimizeApp");
@@ -36,6 +37,14 @@ function download(fileName, textareaID) {
     document.body.removeChild(downloadableLink);
 }
 
+//Default base of file path
+let pathBase = process.resourcesPath;
+const development = true;
+if(development){
+    pathBase = "./python";
+}
+console.log(pathBase);
+
 // Tools and Scripts
 if(document.getElementById("arpSpoofBtn")) {
     let py;
@@ -46,7 +55,7 @@ if(document.getElementById("arpSpoofBtn")) {
             py.kill();
             output.value = "";
         }
-        py = spawn(`python`,["./python/Arpspoof.py",victimIp.value], {detached: true});
+        py = spawn(`python`,[`${pathBase}/Arpspoof.py`,victimIp.value], {detached: true});
         py.stdout.on('data', (data) => {
             output.value += data;
             output.scrollTop = output.scrollHeight;
@@ -72,7 +81,7 @@ if(document.getElementById("hostSnifferBtn")) {
 
         output.value = "Hostname sniff started!\n";
         
-        const py = exec(`py ./python/HostnameSniffer.py ${startIp.value} ${endIp.value}`);
+        const py = exec(`py ${pathBase}/HostnameSniffer.py ${startIp.value} ${endIp.value}`);
         py.stdout.on('data', (data) => {
             output.value += data;
             output.scrollTop = output.scrollHeight;
@@ -93,9 +102,8 @@ if(document.getElementById("hostSnifferBtn")) {
 
 if(document.getElementById("chromePassBtn")) {
     document.getElementById("chromePassBtn").addEventListener("click", () => {
-        console.log("Extracting")
         const output = document.getElementById("chromePassOutput");
-        const py = exec(`py ./python/ChromePassExtractor.py`, (error, stdout, stderr) => { 
+        const py = exec(`py ${pathBase}/ChromePassExtractor.py`, (error, stdout, stderr) => { 
             output.value = stdout;
         });
     });
@@ -109,7 +117,7 @@ if(document.getElementById("xssScanBtn")) {
         const output = document.getElementById("xssScanOutput");
         const url = document.getElementById("xssScanUrl");
         output.value = "";
-        const py = exec(`py ./python/XssScanner.py ${url.value}`);
+        const py = exec(`py ${pathBase}/XssScanner.py ${url.value}`);
         py.stdout.on('data', (data) => {
             output.value += data;
             output.scrollTop = output.scrollHeight;
@@ -125,7 +133,7 @@ if(document.getElementById("emailExtractorBtn")) {
         const output = document.getElementById("emailExtractorOutput");
         const url = document.getElementById("emailExtractorUrl");
         output.value = "Started email extraction!";
-        const py = exec(`py ./python/EmailExtractor.py ${url.value}`);
+        const py = exec(`py ${pathBase}/EmailExtractor.py ${url.value}`);
         py.stdout.on('data', (data) => {
             output.value += data;
             output.scrollTop = output.scrollHeight;
