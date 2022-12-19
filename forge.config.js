@@ -5,6 +5,7 @@ module.exports = {
             "./python/Arpspoof.py",
             "./python/ChromePassExtractor.py",
             "./python/HostnameSniffer.py",
+            "./python/Whois.py",
             "./python/XssScanner.py",
         ]
     },

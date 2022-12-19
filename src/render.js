@@ -112,6 +112,22 @@ if(document.getElementById("chromePassBtn")) {
     });
 }
 
+if(document.getElementById("whoisBtn")) {
+    document.getElementById("whoisBtn").addEventListener("click", () => {
+        const output = document.getElementById("whoisOutput");
+        const url = document.getElementById("whoisUrl");
+        output.value = "";
+        const py = exec(`py ${pathBase}/Whois.py ${url.value}`);
+        py.stdout.on('data', (data) => {
+            output.value += data;
+            output.scrollTop = output.scrollHeight;
+        });
+    });
+    document.getElementById("whoisSave").addEventListener("click", () => {
+        download("whoislog", "whoisOutput");
+    });
+}
+
 if(document.getElementById("xssScanBtn")) {
     document.getElementById("xssScanBtn").addEventListener("click", () => {
         const output = document.getElementById("xssScanOutput");
@@ -125,5 +141,21 @@ if(document.getElementById("xssScanBtn")) {
     });
     document.getElementById("xssScanSave").addEventListener("click", () => {
         download("xssscannerlog", "xssScanOutput");
+    });
+}
+
+if(document.getElementById("ipLookupBtn")) {
+    document.getElementById("ipLookupBtn").addEventListener("click", () => {
+        const output = document.getElementById("ipLookupOutput");
+        const url = document.getElementById("ipLookupUrl");
+        output.value = "";
+        const py = exec(`py ${pathBase}/iplookup.py ${url.value}`);
+        py.stdout.on('data', (data) => {
+            output.value += data;
+            output.scrollTop = output.scrollHeight;
+        });
+    });
+    document.getElementById("ipLookupSave").addEventListener("click", () => {
+        download("iplookuplog", "ipLookupOutput");
     });
 }
