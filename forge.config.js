@@ -7,6 +7,7 @@ module.exports = {
             "./python/HostnameSniffer.py",
             "./python/Whois.py",
             "./python/XssScanner.py",
+            "./python/Iplookup.py",
         ]
     },
     rebuildConfig: {},
