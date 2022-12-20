@@ -8,6 +8,7 @@ module.exports = {
             "./python/Whois.py",
             "./python/XssScanner.py",
             "./python/Iplookup.py",
+            "./python/Crypter.py",
         ]
     },
     rebuildConfig: {},
@@ -15,7 +16,8 @@ module.exports = {
         {
             name: '@electron-forge/maker-squirrel',
             config: {
-                setupIcon: './icon.ico'
+                setupIcon: './icon.ico',
+                loadingGif: './hacksir.gif'
             },
         },
     ],
