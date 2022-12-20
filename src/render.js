@@ -159,3 +159,35 @@ if(document.getElementById("ipLookupBtn")) {
         download("iplookuplog", "ipLookupOutput");
     });
 }
+
+if(document.getElementById("crypterEncryptBtn")) {
+    const output = document.getElementById("crypterOutput");
+    let message;
+    let pass;
+    document.getElementById("crypterEncryptBtn").addEventListener("click", () => {
+        message = document.getElementById("crypterMessage");
+        pass = document.getElementById("crypterPass");
+        output.value = "";
+        const py = exec(`py ${pathBase}/Crypter.py -e "${message.value}" -p ${pass.value}`);
+        py.stdout.on('data', (data) => {
+            output.value += data;
+            output.scrollTop = output.scrollHeight;
+        });
+        py.stderr.on("data", data => {
+            console.log(data);
+        });
+    });
+    document.getElementById("crypterDecryptBtn").addEventListener("click", () => {
+        message = document.getElementById("crypterMessage");
+        pass = document.getElementById("crypterPass");
+        output.value = "";
+        const py = exec(`py ${pathBase}/Crypter.py -d "${message.value}" -p ${pass.value}`);
+        py.stdout.on('data', (data) => {
+            output.value += data;
+            output.scrollTop = output.scrollHeight;
+        });
+    });
+    document.getElementById("crypterSave").addEventListener("click", () => {
+        download("crypterlog", "crypterOutput");
+    });
+}
