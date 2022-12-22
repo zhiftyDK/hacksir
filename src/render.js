@@ -149,7 +149,7 @@ if(document.getElementById("ipLookupBtn")) {
         const output = document.getElementById("ipLookupOutput");
         const url = document.getElementById("ipLookupUrl");
         output.value = "";
-        const py = exec(`py ${pathBase}/iplookup.py ${url.value}`);
+        const py = exec(`py ${pathBase}/Iplookup.py ${url.value}`);
         py.stdout.on('data', (data) => {
             output.value += data;
             output.scrollTop = output.scrollHeight;
@@ -189,5 +189,22 @@ if(document.getElementById("crypterEncryptBtn")) {
     });
     document.getElementById("crypterSave").addEventListener("click", () => {
         download("crypterlog", "crypterOutput");
+    });
+}
+
+if(document.getElementById("passStrengthBtn")) {
+    document.getElementById("passStrengthBtn").addEventListener("click", () => {
+        console.log("hello")
+        const output = document.getElementById("passStrengthOutput");
+        const password = document.getElementById("passStrengthPassword");
+        output.value = "";
+        const py = exec(`py ${pathBase}/PasswordStrength.py "${password.value}"`);
+        py.stdout.on('data', (data) => {
+            output.value += data;
+            output.scrollTop = output.scrollHeight;
+        });
+    });
+    document.getElementById("passStrengthSave").addEventListener("click", () => {
+        download("passStrengthlog", "passStrengthOutput");
     });
 }

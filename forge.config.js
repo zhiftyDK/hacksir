@@ -9,6 +9,7 @@ module.exports = {
             "./python/XssScanner.py",
             "./python/Iplookup.py",
             "./python/Crypter.py",
+            "./python/PasswordStrength.py",
         ]
     },
     rebuildConfig: {},
