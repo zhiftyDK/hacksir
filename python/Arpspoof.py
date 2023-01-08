@@ -4,7 +4,7 @@ import sys
 
 interval = 2
 ip_target = sys.argv[1]
-ip_gateway = "192.168.1.254"
+ip_gateway = sys.argv[2]
 
 print(f"Spoofing victim: {ip_target}")
 
