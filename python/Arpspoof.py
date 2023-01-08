@@ -1,11 +1,10 @@
 import scapy.all as scapy
 import time
 import sys
-import netifaces
 
 interval = 2
 ip_target = sys.argv[1]
-ip_gateway = netifaces.gateways()['default'][netifaces.AF_INET][0]
+ip_gateway = "192.168.1.254"
 
 print(f"Spoofing victim: {ip_target}")
 
