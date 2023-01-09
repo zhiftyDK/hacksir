@@ -48,22 +48,30 @@ console.log(pathBase);
 // Tools and Scripts
 if(document.getElementById("arpSpoofBtn")) {
     let py;
+    let victimIp;
+    let gatewayIp;
     const output = document.getElementById("arpSpoofOutput");
     document.getElementById("arpSpoofBtn").addEventListener("click", () => {
-        const victimIp = document.getElementById("arpSpoofVictimIp");
-        const gatewayIp = document.getElementById("arpSpoofGatewayIp");
+        victimIp = document.getElementById("arpSpoofVictimIp");
+        gatewayIp = document.getElementById("arpSpoofGatewayIp");
         if(py != undefined) {
             py.kill();
+            spawn(`python`,[`${pathBase}/Arpspoof.py`,"--restore",victimIp.value,gatewayIp.value], {detached: true});
             output.value = "";
         }
-        py = spawn(`python`,[`${pathBase}/Arpspoof.py`,victimIp.value,gatewayIp.value], {detached: true});
+        py = spawn(`python`,[`${pathBase}/Arpspoof.py`,"--spoof",victimIp.value,gatewayIp.value], {detached: true});
         py.stdout.on('data', (data) => {
             output.value += data;
             output.scrollTop = output.scrollHeight;
         });
     });
     document.getElementById("arpSpoofStopBtn").addEventListener("click", () => {
-        py.stdin.write("exit");
+        py.kill();
+        py = spawn(`python`,[`${pathBase}/Arpspoof.py`,"--restore",victimIp.value,gatewayIp.value], {detached: true});
+        py.stdout.on('data', (data) => {
+            output.value += data;
+            output.scrollTop = output.scrollHeight;
+        });
     });
     document.getElementById("arpSpoofSave").addEventListener("click", () => {
         download("arpspooflog", "arpSpoofOutput");
