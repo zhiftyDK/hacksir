@@ -181,9 +181,6 @@ if(document.getElementById("crypterEncryptBtn")) {
             output.value += data;
             output.scrollTop = output.scrollHeight;
         });
-        py.stderr.on("data", data => {
-            console.log(data);
-        });
     });
     document.getElementById("crypterDecryptBtn").addEventListener("click", () => {
         message = document.getElementById("crypterMessage");
@@ -202,7 +199,6 @@ if(document.getElementById("crypterEncryptBtn")) {
 
 if(document.getElementById("passStrengthBtn")) {
     document.getElementById("passStrengthBtn").addEventListener("click", () => {
-        console.log("hello")
         const output = document.getElementById("passStrengthOutput");
         const password = document.getElementById("passStrengthPassword");
         output.value = "";
