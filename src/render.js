@@ -51,19 +51,19 @@ if(document.getElementById("arpSpoofBtn")) {
     const output = document.getElementById("arpSpoofOutput");
     document.getElementById("arpSpoofBtn").addEventListener("click", () => {
         const victimIp = document.getElementById("arpSpoofVictimIp");
+        const gatewayIp = document.getElementById("arpSpoofGatewayIp");
         if(py != undefined) {
             py.kill();
             output.value = "";
         }
-        py = spawn(`python`,[`${pathBase}/Arpspoof.py`,victimIp.value], {detached: true});
+        py = spawn(`python`,[`${pathBase}/Arpspoof.py`,victimIp.value,gatewayIp.value], {detached: true});
         py.stdout.on('data', (data) => {
             output.value += data;
             output.scrollTop = output.scrollHeight;
         });
     });
     document.getElementById("arpSpoofStopBtn").addEventListener("click", () => {
-        py.kill();
-        output.value += "Attack ended, restoring ip arrangement!";
+        py.stdin.write("exit");
     });
     document.getElementById("arpSpoofSave").addEventListener("click", () => {
         download("arpspooflog", "arpSpoofOutput");

