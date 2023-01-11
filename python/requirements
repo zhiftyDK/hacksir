@@ -1,6 +1,6 @@
 scapy
 bs4
-requests
 pywin32
-netifaces
 python-whois
+pycryptodome
+pprint
