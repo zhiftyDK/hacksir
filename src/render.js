@@ -212,3 +212,28 @@ if(document.getElementById("passStrengthBtn")) {
         download("passStrengthlog", "passStrengthOutput");
     });
 }
+
+if(document.getElementById("synFloodStartBtn")) {
+    let py;
+    const output = document.getElementById("synFloodOutput");
+    document.getElementById("synFloodStartBtn").addEventListener("click", () => {
+        const Ip = document.getElementById("synFloodIp");
+        const Port = document.getElementById("synFloodPort");
+        if(py != undefined) {
+            py.kill();
+            output.value = "";
+        }
+        py = spawn(`python`,[`${pathBase}/SynFlooding.py`,Ip.value,Port.value], {detached: true});
+        py.stdout.on('data', (data) => {
+            output.value += data;
+            output.scrollTop = output.scrollHeight;
+        });
+    });
+    document.getElementById("synFloodStopBtn").addEventListener("click", () => {
+        py.kill();
+        output.value += "Syn Flooding attack ended!";
+    });
+    document.getElementById("synFloodSave").addEventListener("click", () => {
+        download("synfloodlog", "synFloodOutput");
+    });
+}
