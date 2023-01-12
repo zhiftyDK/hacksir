@@ -15,14 +15,14 @@ def main():
             p = Process(target=checkIP, args=(ip,))
             p.start()
         except:
-            print("Exception is thrown")
+            print("Exception is thrown", flush=True)
             continue
 
 #Check ip address hostname
 def checkIP(ip):
     try:
         hostname = socket.gethostbyaddr(ip)[0]
-        print(f"[Hostname: {hostname}, Ipaddress: {socket.gethostbyname(hostname).strip()}]")
+        print(f"[Hostname: {hostname}, Ipaddress: {socket.gethostbyname(hostname).strip()}]", flush=True)
     except:
         pass
 

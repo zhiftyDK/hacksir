@@ -10,6 +10,7 @@ module.exports = {
             "./python/Iplookup.py",
             "./python/Crypter.py",
             "./python/PasswordStrength.py",
+            "./python/SynFlooding.py",
         ]
     },
     rebuildConfig: {},

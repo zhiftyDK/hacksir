@@ -30,9 +30,9 @@ if "-e" in sys.argv:
     message = sys.argv[sys.argv.index("-e") + 1]
     password = sys.argv[sys.argv.index("-p") + 1]
     encrypted_message = encrypt(message, password)
-    print(encrypted_message)
+    print(encrypted_message, flush=True)
 elif "-d" in sys.argv:
     message = sys.argv[sys.argv.index("-d") + 1]
     password = sys.argv[sys.argv.index("-p") + 1]
     decrypted_message = decrypt(message, password)
-    print(decrypted_message)
+    print(decrypted_message, flush=True)

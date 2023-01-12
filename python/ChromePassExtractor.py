@@ -71,17 +71,17 @@ def main():
         date_created = row[4]
         date_last_used = row[5]        
         if username or password:
-            print(f"Origin URL: {origin_url}")
-            print(f"Action URL: {action_url}")
-            print(f"Username: {username}")
-            print(f"Password: {password}")
+            print(f"Origin URL: {origin_url}", flush=True)
+            print(f"Action URL: {action_url}", flush=True)
+            print(f"Username: {username}", flush=True)
+            print(f"Password: {password}", flush=True)
         else:
             continue
         if date_created != 86400000000 and date_created:
-            print(f"Creation date: {str(get_chrome_datetime(date_created))}")
+            print(f"Creation date: {str(get_chrome_datetime(date_created))}", flush=True)
         if date_last_used != 86400000000 and date_last_used:
-            print(f"Last Used: {str(get_chrome_datetime(date_last_used))}")
-        print("="*50)
+            print(f"Last Used: {str(get_chrome_datetime(date_last_used))}", flush=True)
+        print("="*50, flush=True)
 
     cursor.close()
     db.close()

@@ -13,4 +13,4 @@ def get_location():
     return location_data
 
 
-print(get_location())
+print(get_location(), flush=True)
