@@ -1,29 +1,32 @@
+import json
+import sys
+import base64
+from Crypto.Cipher import AES
 from Crypto.Protocol.KDF import PBKDF2
 from Crypto.Cipher import AES
-from Crypto.Util.Padding import pad, unpad
-import base64
-import sys
+from Crypto.Util.Padding import unpad
+
+salt = b'\x03J\x91\xb5\x85\xa9\xa7\xd7\xd3\xc4\x1aZ!Bf\xf0\xd6\xba\xf7${ \xbb\x85T\xb8\xcf3C\xe5\xa3\xe5'
 
 def encrypt(message, password):
-    data = bytes(password, "utf-8")
-    salt = data + bytes(32 - len(data))
-    iv = data + bytes(16 - len(data))
     key = PBKDF2(password, salt, dkLen=32)
-    cipher = AES.new(key, AES.MODE_CBC, iv=iv)
-    ciphered_data = cipher.encrypt(pad(bytes(message, "utf-8"), AES.block_size))
-    base64_data = base64.b64encode(ciphered_data).decode("utf-8")
-    return base64_data
+    cipher = AES.new(key, AES.MODE_GCM)
+    ciphertext, tag = cipher.encrypt_and_digest(bytes(message, "utf-8"))
+    json_k = ['nonce', 'ciphertext', 'tag']
+    json_v = [base64.b64encode(x).decode('utf-8') for x in [cipher.nonce, ciphertext, tag]]
+    result = json.dumps(dict(zip(json_k, json_v)))
+    return base64.b64encode(bytes(result, "utf-8")).decode("utf-8")
 
 def decrypt(message, password):
     try:
-        data = bytes(password, "utf-8")
-        salt = data + bytes(32 - len(data))
-        iv = data + bytes(16 - len(data))
         key = PBKDF2(password, salt, dkLen=32)
-        cipher = AES.new(key, AES.MODE_CBC, iv=iv)
-        deciphered_data = unpad(cipher.decrypt(base64.b64decode(message)), AES.block_size).decode("utf-8")
-        return deciphered_data
-    except:
+        b64 = json.loads(base64.b64decode(message).decode("utf-8"))
+        json_k = ['nonce', 'ciphertext', 'tag']
+        jv = {k:base64.b64decode(b64[k]) for k in json_k}
+        cipher = AES.new(key, AES.MODE_GCM, nonce=jv['nonce'])
+        plaintext = cipher.decrypt_and_verify(jv['ciphertext'], jv['tag']).decode("utf-8")
+        return plaintext
+    except (ValueError, KeyError):
         return message
 
 if "-e" in sys.argv:
