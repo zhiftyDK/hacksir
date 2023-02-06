@@ -3,6 +3,7 @@ module.exports = {
         icon: './icon.ico',
         extraResource: [
             "./python/Arpspoof.py",
+            "./python/MultiArpspoof.py",
             "./python/ChromePassExtractor.py",
             "./python/HostnameSniffer.py",
             "./python/Whois.py",

@@ -82,6 +82,40 @@ if(document.getElementById("arpSpoofBtn")) {
     });
 }
 
+if(document.getElementById("multiArpSpoofBtn")) {
+    let py;
+    let startIp;
+    let endIp;
+    let gatewayIp;
+    const output = document.getElementById("multiArpSpoofOutput");
+    document.getElementById("multiArpSpoofBtn").addEventListener("click", () => {
+        startIp = document.getElementById("multiArpSpoofStartIp");
+        endIp = document.getElementById("multiArpSpoofEndIp");
+        gatewayIp = document.getElementById("multiArpSpoofGatewayIp");
+        if(py != undefined) {
+            py.kill();
+            spawn(`python`,[`${pathBase}/MultiArpspoof.py`,"--restore",startIp.value,endIp.value,gatewayIp.value], {detached: true});
+            output.value = "";
+        }
+        py = spawn(`python`,[`${pathBase}/MultiArpspoof.py`,"--spoof",startIp.value,endIp.value,gatewayIp.value], {detached: true});
+        py.stdout.on('data', (data) => {
+            output.value += data;
+            output.scrollTop = output.scrollHeight;
+        });
+    });
+    document.getElementById("multiArpSpoofStopBtn").addEventListener("click", () => {
+        py.kill();
+        py = spawn(`python`,[`${pathBase}/MultiArpspoof.py`,"--restore",startIp.value,endIp.value,gatewayIp.value], {detached: true});
+        py.stdout.on('data', (data) => {
+            output.value += data;
+            output.scrollTop = output.scrollHeight;
+        });
+    });
+    document.getElementById("multiArpSpoofSave").addEventListener("click", () => {
+        download("multiArpspooflog", "multiArpSpoofOutput");
+    });
+}
+
 if(document.getElementById("hostSnifferBtn")) {
     document.getElementById("hostSnifferBtn").addEventListener("click", () => {
         const startIp = document.getElementById("hostSnifferStartIp");
