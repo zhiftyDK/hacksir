@@ -12,6 +12,7 @@ module.exports = {
             "./python/Crypter.py",
             "./python/PasswordStrength.py",
             "./python/SynFlooding.py",
+            "./python/RedirectDetector.py",
         ]
     },
     rebuildConfig: {},
