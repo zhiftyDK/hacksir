@@ -1,11 +1,5 @@
 const { exec, spawn } = require("node:child_process");
 const { ipcRenderer } = require("electron");
-const prettylink = require('prettylink');
-const ip = require("ip");
-const cors = require("cors");
-const express = require("express");
-const app = express();
-app.use(cors());
 
 document.getElementById("minimizeBtn").addEventListener("click", () => {
     ipcRenderer.send("minimizeApp");
