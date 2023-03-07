@@ -36,11 +36,14 @@ function download(fileName, textareaID) {
 }
 
 //Default base of file path
-let pathBase = process.resourcesPath;
-const development = true;
+let pythonPathBase = process.resourcesPath + "\\python\\python311\\python.exe"
+let pathBase = process.resourcesPath + "\\python";
+const development = false;
 if(development){
+    pythonPathBase = ".\\python\\python311\\python.exe"
     pathBase = "./python";
 }
+console.log(pythonPathBase);
 console.log(pathBase);
 
 // Tools and Scripts
@@ -54,10 +57,10 @@ if(document.getElementById("arpSpoofBtn")) {
         gatewayIp = document.getElementById("arpSpoofGatewayIp");
         if(py != undefined) {
             py.kill();
-            spawn(`python`,[`${pathBase}/Arpspoof.py`,"--restore",victimIp.value,gatewayIp.value], {detached: true});
+            spawn(pythonPathBase,[`${pathBase}/Arpspoof.py`,"--restore",victimIp.value,gatewayIp.value], {detached: true});
             output.value = "";
         }
-        py = spawn(`python`,[`${pathBase}/Arpspoof.py`,"--spoof",victimIp.value,gatewayIp.value], {detached: true});
+        py = spawn(pythonPathBase,[`${pathBase}/Arpspoof.py`,"--spoof",victimIp.value,gatewayIp.value], {detached: true});
         py.stdout.on('data', (data) => {
             output.value += data;
             output.scrollTop = output.scrollHeight;
@@ -65,7 +68,7 @@ if(document.getElementById("arpSpoofBtn")) {
     });
     document.getElementById("arpSpoofStopBtn").addEventListener("click", () => {
         py.kill();
-        py = spawn(`python`,[`${pathBase}/Arpspoof.py`,"--restore",victimIp.value,gatewayIp.value], {detached: true});
+        py = spawn(pythonPathBase,[`${pathBase}/Arpspoof.py`,"--restore",victimIp.value,gatewayIp.value], {detached: true});
         py.stdout.on('data', (data) => {
             output.value += data;
             output.scrollTop = output.scrollHeight;
@@ -88,10 +91,10 @@ if(document.getElementById("multiArpSpoofBtn")) {
         gatewayIp = document.getElementById("multiArpSpoofGatewayIp");
         if(py != undefined) {
             py.kill();
-            spawn(`python`,[`${pathBase}/MultiArpspoof.py`,"--restore",startIp.value,endIp.value,gatewayIp.value], {detached: true});
+            spawn(pythonPathBase,[`${pathBase}/MultiArpspoof.py`,"--restore",startIp.value,endIp.value,gatewayIp.value], {detached: true});
             output.value = "";
         }
-        py = spawn(`python`,[`${pathBase}/MultiArpspoof.py`,"--spoof",startIp.value,endIp.value,gatewayIp.value], {detached: true});
+        py = spawn(pythonPathBase,[`${pathBase}/MultiArpspoof.py`,"--spoof",startIp.value,endIp.value,gatewayIp.value], {detached: true});
         py.stdout.on('data', (data) => {
             output.value += data;
             output.scrollTop = output.scrollHeight;
@@ -99,7 +102,7 @@ if(document.getElementById("multiArpSpoofBtn")) {
     });
     document.getElementById("multiArpSpoofStopBtn").addEventListener("click", () => {
         py.kill();
-        py = spawn(`python`,[`${pathBase}/MultiArpspoof.py`,"--restore",startIp.value,endIp.value,gatewayIp.value], {detached: true});
+        py = spawn(pythonPathBase,[`${pathBase}/MultiArpspoof.py`,"--restore",startIp.value,endIp.value,gatewayIp.value], {detached: true});
         py.stdout.on('data', (data) => {
             output.value += data;
             output.scrollTop = output.scrollHeight;
@@ -121,7 +124,7 @@ if(document.getElementById("hostSnifferBtn")) {
 
         output.value = "Hostname sniff started!\n";
         
-        const py = exec(`py ${pathBase}/HostnameSniffer.py ${startIp.value} ${endIp.value}`);
+        const py = exec(`${pythonPathBase} ${pathBase}/HostnameSniffer.py ${startIp.value} ${endIp.value}`);
         py.stdout.on('data', (data) => {
             output.value += data;
             output.scrollTop = output.scrollHeight;
@@ -143,7 +146,7 @@ if(document.getElementById("hostSnifferBtn")) {
 if(document.getElementById("chromePassBtn")) {
     document.getElementById("chromePassBtn").addEventListener("click", () => {
         const output = document.getElementById("chromePassOutput");
-        const py = exec(`py ${pathBase}/ChromePassExtractor.py`, (error, stdout, stderr) => { 
+        const py = exec(`${pythonPathBase} ${pathBase}/ChromePassExtractor.py`, (error, stdout, stderr) => { 
             output.value = stdout;
         });
     });
@@ -157,7 +160,7 @@ if(document.getElementById("whoisBtn")) {
         const output = document.getElementById("whoisOutput");
         const url = document.getElementById("whoisUrl");
         output.value = "";
-        const py = exec(`py ${pathBase}/Whois.py ${url.value}`);
+        const py = exec(`${pythonPathBase} ${pathBase}/Whois.py ${url.value}`);
         py.stdout.on('data', (data) => {
             output.value += data;
             output.scrollTop = output.scrollHeight;
@@ -173,7 +176,7 @@ if(document.getElementById("xssScanBtn")) {
         const output = document.getElementById("xssScanOutput");
         const url = document.getElementById("xssScanUrl");
         output.value = "";
-        const py = exec(`py ${pathBase}/XssScanner.py ${url.value}`);
+        const py = exec(`${pythonPathBase} ${pathBase}/XssScanner.py ${url.value}`);
         py.stdout.on('data', (data) => {
             output.value += data;
             output.scrollTop = output.scrollHeight;
@@ -189,7 +192,7 @@ if(document.getElementById("ipLookupBtn")) {
         const output = document.getElementById("ipLookupOutput");
         const url = document.getElementById("ipLookupUrl");
         output.value = "";
-        const py = exec(`py ${pathBase}/Iplookup.py ${url.value}`);
+        const py = exec(`${pythonPathBase} ${pathBase}/Iplookup.py ${url.value}`);
         py.stdout.on('data', (data) => {
             output.value += data;
             output.scrollTop = output.scrollHeight;
@@ -208,7 +211,7 @@ if(document.getElementById("crypterEncryptBtn")) {
         message = document.getElementById("crypterMessage");
         pass = document.getElementById("crypterPass");
         output.value = "";
-        const py = exec(`py ${pathBase}/Crypter.py -e "${message.value}" -p ${pass.value}`);
+        const py = exec(`${pythonPathBase} ${pathBase}/Crypter.py -e "${message.value}" -p ${pass.value}`);
         py.stdout.on('data', (data) => {
             output.value += data;
             output.scrollTop = output.scrollHeight;
@@ -218,7 +221,7 @@ if(document.getElementById("crypterEncryptBtn")) {
         message = document.getElementById("crypterMessage");
         pass = document.getElementById("crypterPass");
         output.value = "";
-        const py = exec(`py ${pathBase}/Crypter.py -d "${message.value}" -p ${pass.value}`);
+        const py = exec(`${pythonPathBase} ${pathBase}/Crypter.py -d "${message.value}" -p ${pass.value}`);
         py.stdout.on('data', (data) => {
             output.value += data;
             output.scrollTop = output.scrollHeight;
@@ -234,7 +237,7 @@ if(document.getElementById("passStrengthBtn")) {
         const output = document.getElementById("passStrengthOutput");
         const password = document.getElementById("passStrengthPassword");
         output.value = "";
-        const py = exec(`py ${pathBase}/PasswordStrength.py "${password.value}"`);
+        const py = exec(`${pythonPathBase} ${pathBase}/PasswordStrength.py "${password.value}"`);
         py.stdout.on('data', (data) => {
             output.value += data;
             output.scrollTop = output.scrollHeight;
@@ -255,7 +258,7 @@ if(document.getElementById("synFloodStartBtn")) {
             py.kill();
             output.value = "";
         }
-        py = spawn(`python`,[`${pathBase}/SynFlooding.py`,Ip.value,Port.value], {detached: true});
+        py = spawn(pythonPathBase,[`${pathBase}/SynFlooding.py`,Ip.value,Port.value], {detached: true});
         py.stdout.on('data', (data) => {
             output.value += data;
             output.scrollTop = output.scrollHeight;
@@ -275,7 +278,7 @@ if(document.getElementById("redirectDetectorBtn")) {
         const output = document.getElementById("redirectDetectorOutput");
         const url = document.getElementById("redirectDetectorURL");
         output.value = "";
-        const py = exec(`py ${pathBase}/RedirectDetector.py "${url.value}"`);
+        const py = exec(`${pythonPathBase} ${pathBase}/RedirectDetector.py "${url.value}"`);
         py.stdout.on('data', (data) => {
             output.value += data;
             output.scrollTop = output.scrollHeight;
