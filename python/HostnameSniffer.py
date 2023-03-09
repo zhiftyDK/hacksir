@@ -1,6 +1,7 @@
 import ipaddress
 import socket
 import sys
+sys.dont_write_bytecode = True
 from multiprocessing import Process
 
 def main():

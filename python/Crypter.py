@@ -1,5 +1,6 @@
 import json
 import sys
+sys.dont_write_bytecode = True
 import base64
 from Crypto.Cipher import AES
 from Crypto.Protocol.KDF import PBKDF2

@@ -2,6 +2,8 @@ import requests
 from pprint import pprint
 from bs4 import BeautifulSoup as bs
 from urllib.parse import urljoin
+import sys
+sys.dont_write_bytecode = True
 
 
 def get_all_forms(url):

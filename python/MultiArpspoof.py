@@ -1,6 +1,7 @@
 import scapy.all as scapy
 import time
 import sys
+sys.dont_write_bytecode = True
 import threading
 import ipaddress
 

@@ -1,5 +1,6 @@
 from scapy.all import IP, TCP, Raw, RandShort, send
 import sys
+sys.dont_write_bytecode = True
 # target IP address (should be a testing router/firewall)
 target_ip = sys.argv[1]
 # the target port u want to flood

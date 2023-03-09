@@ -38,7 +38,7 @@ function download(fileName, textareaID) {
 //Default base of file path
 let pythonPathBase = process.resourcesPath + "\\python\\python311\\python.exe"
 let pathBase = process.resourcesPath + "\\python";
-const development = false;
+const development = true;
 if(development){
     pythonPathBase = ".\\python\\python311\\python.exe"
     pathBase = "./python";
