@@ -12,5 +12,5 @@ Hack yourself or others with consent.
 
 ## Download
 <a href="/zhiftyDK/hacksir/releases/tag/hacksir">
-<img src="https://assets.stickpng.com/images/586abf91b6fc1117b60b2758.png">
+<img src="https://raw.githubusercontent.com/zhiftyDK/hacksir/main/download_button.png">
 </a>
