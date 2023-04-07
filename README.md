@@ -1,5 +1,4 @@
-![alt text](https://raw.githubusercontent.com/zhiftyDK/hacksir/main/src/images/hacksir.png)
-# Hacksir
+# <img src="https://raw.githubusercontent.com/zhiftyDK/hacksir/main/src/images/hacksir(white).svg"> Hacksir
 
 ## Disclaimer
 This application is for educational purposes only, i do not take responsebility for any mishab and misuse of the application.
