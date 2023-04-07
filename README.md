@@ -11,4 +11,4 @@ You can learn about hacking types.
 Hack yourself or others with consent.
 
 ## Download
-<a href="/zhiftyDK/hacksir/releases/download/hacksir/Hacksir-1.0.0.Setup.exe" rel="nofollow" data-turbo="false" data-view-component="true" class="Truncate">
+<a href="/zhiftyDK/hacksir/releases/download/hacksir/Hacksir-1.0.0.Setup.exe" rel="nofollow" data-turbo="false" data-view-component="true" class="Truncate">Hacksir Latest</a>
