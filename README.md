@@ -12,5 +12,5 @@ Hack yourself or others with consent.
 
 ## Download
 <a href="https://github.com/zhiftyDK/hacksir/releases/tag/hacksir">
-<img src="https://raw.githubusercontent.com/zhiftyDK/hacksir/main/download_button.png">
+<img src="https://www.mtctutorials.com/wp-content/uploads/2019/04/Download-button-png-GREEN-color-by-mtc-tutorials.png">
 </a>
