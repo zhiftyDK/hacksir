@@ -10,7 +10,6 @@ Hacksir is a hacking application for educational and ethical purposes.
 You can learn about hacking types.
 Hack yourself or others with consent.
 
-## Download
 <a href="https://github.com/zhiftyDK/hacksir/releases/tag/hacksir">
 <img src="https://www.mtctutorials.com/wp-content/uploads/2019/04/Download-button-png-GREEN-color-by-mtc-tutorials.png" style="height: 3rem; margin: 0; padding: 0;">
 </a>
