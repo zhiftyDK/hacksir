@@ -1,4 +1,4 @@
-# <img src="https://raw.githubusercontent.com/zhiftyDK/hacksir/main/src/images/hacksir(white).svg" style="height: 3rem;"> Hacksir
+# <img src="https://raw.githubusercontent.com/zhiftyDK/hacksir/main/src/images/hacksir(white).svg" style="height: 3rem; margin: 0; padding: 0;"> Hacksir
 
 ## Disclaimer
 This application is for educational purposes only, i do not take responsebility for any mishab and misuse of the application.
