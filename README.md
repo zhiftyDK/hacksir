@@ -13,3 +13,7 @@ Hack yourself or others with consent.
 <a href="https://github.com/zhiftyDK/hacksir/releases/download/hacksir/Hacksir-1.0.0.Setup.exe">
 <img src="https://www.mtctutorials.com/wp-content/uploads/2019/04/Download-button-png-GREEN-color-by-mtc-tutorials.png" style="height: 3rem; margin: 0; padding: 0;">
 </a>
+
+## To be done
+* Linux version
+* More tools
