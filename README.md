@@ -14,6 +14,17 @@ Hack yourself or others with consent.
 <img src="https://www.mtctutorials.com/wp-content/uploads/2019/04/Download-button-png-GREEN-color-by-mtc-tutorials.png" style="height: 3rem; margin: 0; padding: 0;">
 </a>
 
-## To be done
-* Linux version
-* More tools
+## To do
+### DONE ✅, In Development ⏱️, Not started ❌
+* Windows release ✅
+* Linux release ❌
+* Arp Spoofer ✅
+* Hostname Sniffer ✅
+* Chrome password extractor ✅
+* WHOIS ✅
+* XSS scanner ✅
+* Ip lookup ✅
+* Crypter (Message encryption) ✅
+* Password strength tester ✅
+* Syn flooding ✅
+* Redirect detector ✅
