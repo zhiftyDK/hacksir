@@ -6,9 +6,6 @@ The word “Hack” or “Hacking” that is used on this site shall be regarded
 Only use the software against your own devices or if consent is given. DO NOT BREAK THE LAW
 
 ## What is Hacksir
-
-<img src="https://raw.githubusercontent.com/zhiftyDK/hacksir/main/Hacksir_inapp.png" style="height: 10rem; margin: 0; padding: 0;">
-
 Hacksir is a hacking application for educational and ethical purposes.
 You can learn about hacking types.
 Hack yourself or others with consent.
@@ -32,3 +29,6 @@ Hack yourself or others with consent.
 * Password Strength Tester ✅
 * Syn Flooding ✅
 * Redirect Detector ✅
+
+## Images
+<img src="https://raw.githubusercontent.com/zhiftyDK/hacksir/main/Hacksir_inapp.png" style="height: 30rem; margin: 0; padding: 0;">
