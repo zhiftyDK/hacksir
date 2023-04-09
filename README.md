@@ -6,8 +6,8 @@ The word “Hack” or “Hacking” that is used on this site shall be regarded
 Only use the software against your own devices or if consent is given. DO NOT BREAK THE LAW
 
 ## What is Hacksir ❓
-Hacksir is a hacking application for educational and ethical purposes. \n
-You can learn about hacking types. \n
+Hacksir is a hacking application for educational and ethical purposes. <br/>
+You can learn about hacking types. <br/>
 Hack yourself or others with consent.
 
 <a href="https://github.com/zhiftyDK/hacksir/releases/download/hacksir/Hacksir-1.0.0.Setup.exe">
