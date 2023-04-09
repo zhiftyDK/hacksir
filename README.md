@@ -15,7 +15,7 @@ Hack yourself or others with consent.
 </a>
 
 ## To do
-##### DONE ✅, In Development ⏱️, Not started ❌
+#### Complete ✅, In progress ⏱️, Not started ❌
 * Windows release ✅
 * Linux release ❌
 * Arp Spoofer ✅
