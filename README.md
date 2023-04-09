@@ -31,4 +31,4 @@ Hack yourself or others with consent.
 * Redirect Detector ✅
 
 ## Images
-<img src="https://raw.githubusercontent.com/zhiftyDK/hacksir/main/Hacksir_inapp.png" style="height: 30rem; margin: 0; padding: 0;">
+<img src="https://raw.githubusercontent.com/zhiftyDK/hacksir/main/Hacksir_inapp.png" style="height: 20rem; margin: 0; padding: 0;">
