@@ -19,12 +19,13 @@ Hack yourself or others with consent.
 * Windows release ✅
 * Linux release ❌
 * Arp Spoofer ✅
+  * Multi Arp Spoofer ✅
 * Hostname Sniffer ✅
-* Chrome password extractor ✅
+* Chrome Password Extractor ✅
 * WHOIS ✅
-* XSS scanner ✅
-* Ip lookup ✅
+* XSS Scanner ✅
+* Ip Lookup ✅
 * Crypter (Message encryption) ✅
-* Password strength tester ✅
-* Syn flooding ✅
-* Redirect detector ✅
+* Password Strength Tester ✅
+* Syn Flooding ✅
+* Redirect Detector ✅
