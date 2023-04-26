@@ -288,3 +288,30 @@ if(document.getElementById("redirectDetectorBtn")) {
         download("redirectDetectorlog", "redirectDetectorOutput");
     });
 }
+
+if(document.getElementById("flagcrackStartBtn")) {
+    document.getElementById("flagcrackUploadBtn").addEventListener("click", () => {
+        ipcRenderer.send("openDialog");
+    });
+    let filePath = "";
+    ipcRenderer.on("selectedFile", (event, path) => {
+        filePath = path;
+        document.getElementById("flagcrackUploadBtn").innerText = path.split("\\")[path.split("\\").length - 1];
+    });
+    document.getElementById("flagcrackStartBtn").addEventListener("click", () => {
+        const output = document.getElementById("flagcrackOutput");
+        const flagType = document.getElementById("flagcrackFlagtype");
+        output.value = "";
+        const py = exec(`${pythonPathBase} ${pathBase}/FlagCrack.py -p "${filePath || ""}" -f "${flagType.value || ""}"`);
+        py.stdout.on('data', (data) => {
+            output.value += data;
+            output.scrollTop = output.scrollHeight;
+        });
+        py.stderr.on('data', data => {
+            console.log(data);
+        });
+    });
+    document.getElementById("flagcrackSave").addEventListener("click", () => {
+        download("flagcracklog", "flagcrackOutput");
+    });
+}

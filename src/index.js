@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain } = require('electron');
+const { app, BrowserWindow, ipcMain, dialog } = require('electron');
 const path = require('path');
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
@@ -14,6 +14,7 @@ const createWindow = () => {
         titleBarStyle: 'hidden',
         webPreferences: {
             nodeIntegration: true,
+            enableRemoteModule: true,
             contextIsolation: false,
             // devTools: false,
         }
@@ -24,7 +25,7 @@ const createWindow = () => {
     
     ipcMain.on("minimizeApp", () => {
         mainWindow.minimize();
-    })
+    });
 
     ipcMain.on("maximizeApp", () => {
         if(mainWindow.isMaximized()){
@@ -32,11 +33,17 @@ const createWindow = () => {
         } else {
             mainWindow.maximize();
         }
-    })
+    });
 
     ipcMain.on("closeApp", () => {
         mainWindow.close();
-    })
+    });
+
+    ipcMain.on("openDialog", event => {
+        dialog.showOpenDialog({ properties:["openFile"] }).then((data) => {
+            if (data.filePaths.length > 0) { event.sender.send("selectedFile", data.filePaths[0]); }
+        })
+    });
 };
 
 app.on('ready', createWindow);
