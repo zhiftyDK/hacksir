@@ -31,6 +31,7 @@ Hack yourself or others with consent.
 * Redirect Detector ✅
 * Cipher detector ⏱️
 * General deciphering tool ❌
+* Implement Flagcrack ⏱️
 
 ## Images 📷
 <img src="https://raw.githubusercontent.com/zhiftyDK/hacksir/main/Hacksir_inapp.png" style="height: 20rem; margin: 0; padding: 0;">
