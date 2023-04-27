@@ -4,7 +4,6 @@ sys.dont_write_bytecode = True
 import base64
 from Crypto.Cipher import AES
 from Crypto.Protocol.KDF import PBKDF2
-from Crypto.Cipher import AES
 
 salt = b'\x03J\x91\xb5\x85\xa9\xa7\xd7\xd3\xc4\x1aZ!Bf\xf0\xd6\xba\xf7${ \xbb\x85T\xb8\xcf3C\xe5\xa3\xe5'
 
